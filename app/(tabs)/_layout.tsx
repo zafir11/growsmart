@@ -1,30 +1,31 @@
-import { Tabs } from 'expo-router';
 import React from 'react';
-
-import { TabBarIcon } from '@/components/navigation/TabBarIcon';
+import { BottomNavigation } from 'react-native-paper';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
+import WeatherApp from '.';
+
+const HomeRoute = () => < WeatherApp/>;
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
+  const [index, setIndex] = React.useState(0);
+  const [routes] = React.useState([
+    { key: 'home', title: 'Home', focusedIcon: 'home' },
+  ]);
+
+  const renderScene = BottomNavigation.SceneMap({
+    home: HomeRoute,
+  });
 
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-      }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'home' : 'home-outline'} color={color} />
-          ),
-        }}
-      />
-  
-    </Tabs>
-    
+    <BottomNavigation
+      navigationState={{ index, routes }}
+      onIndexChange={setIndex}
+      renderScene={renderScene}
+      
+      activeColor={Colors[colorScheme ?? 'light'].tint}
+      inactiveColor={Colors[colorScheme ?? 'light'].tint}
+      barStyle={{ backgroundColor: Colors[colorScheme ?? 'light'].background }}
+    />
   );
 }
