@@ -8,7 +8,6 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
-import LottieView from "lottie-react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { Link } from "expo-router";
 
@@ -17,24 +16,43 @@ export default function index() {
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
-        <View style={styles.animationStyle}>
-          <LottieView
-            source={require("@/assets/animations/welcome.json")}
-            autoPlay
-            loop
-            style={styles.lottie}
-          />
-        </View>
         <View style={styles.bottomView}>
           <Text style={{ fontWeight: "900", fontSize: 30, color: "#16423C" }}>
-            GROWSMART
+            Register
           </Text>
           <View style={{ marginTop: 60, width: "100%", alignItems: "center" }}>
+            <View style={styles.inputContainer}>
+              <Icon name="address-book" size={20} color="#16423C" style={styles.icon} />
+              <TextInput
+                style={styles.input}
+                placeholder="Enter Name"
+                value={text}
+                onChangeText={(value) => setText(value)}
+              />
+            </View>
             <View style={styles.inputContainer}>
               <Icon name="user" size={20} color="#16423C" style={styles.icon} />
               <TextInput
                 style={styles.input}
                 placeholder="Enter Username"
+                value={text}
+                onChangeText={(value) => setText(value)}
+              />
+            </View>
+            <View style={styles.inputContainer}>
+              <Icon name="address-card" size={20} color="#16423C" style={styles.icon} />
+              <TextInput
+                style={styles.input}
+                placeholder="Enter Company(optional)"
+                value={text}
+                onChangeText={(value) => setText(value)}
+              />
+            </View>
+            <View style={styles.inputContainer}>
+              <Icon name="envelope" size={20} color="#16423C" style={styles.icon} />
+              <TextInput
+                style={styles.input}
+                placeholder="Enter Email"
                 value={text}
                 onChangeText={(value) => setText(value)}
               />
@@ -51,10 +69,10 @@ export default function index() {
           </View>
           <Link href={"/(tabs)"} asChild>
             <TouchableOpacity style={styles.btn}>
-              <Text style={styles.btnText}>Login</Text>
+              <Text style={styles.btnText}>Register</Text>
             </TouchableOpacity>
           </Link>
-          <Text style={{color:'#6A9C89', marginTop:2}}>Don't have a account? <Link href="./register" style={{textDecorationLine:'underline',fontWeight:'900'}}>SignUp</Link></Text>
+          <Text style={{color:'#6A9C89', marginTop:2}}>Aready have a account? <Link href='/' style={{textDecorationLine:'underline',fontWeight:'900'}}>SignIn</Link></Text>
         </View>
       </SafeAreaView>
     </SafeAreaProvider>
@@ -63,24 +81,16 @@ export default function index() {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 26,
+    paddingTop: 100,
     flex: 1,
     backgroundColor: "#ffff",
   },
-  lottie: {
-    height: 300,
-    width: 300,
-  },
-  animationStyle: {
-    flex: 1,
-    alignItems: "center",
-  },
   bottomView: {
-    flex: 2,
+    flex: 1,
     alignItems: "center",
     padding: 50,
     width: "100%",
-    height: "100%",
+    height: "90%",
     borderTopRightRadius: 30,
     borderTopLeftRadius: 30,
     borderTopColor: "#C4DAD2",
@@ -108,7 +118,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   btn: {
-    marginTop: 150,
+    marginTop: 120,
     backgroundColor: "#16423C",
     paddingVertical: 10,
     paddingHorizontal: 20,
