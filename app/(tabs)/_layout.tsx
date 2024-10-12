@@ -1,31 +1,40 @@
 import React from 'react';
 import { BottomNavigation } from 'react-native-paper';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
-import WeatherApp from '.';
 
-const HomeRoute = () => < WeatherApp/>;
+import Camera from './index';
+import Collection from './collection';
+import Profile from './profile';
+
+const CameraRoute = () => < Camera/>;
+const CollectionRoute = () => < Collection/>;
+const ProfileRoute = () => < Profile/>;
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
-  const [index, setIndex] = React.useState(0);
+  const [index, setIndex] = React.useState(1);
   const [routes] = React.useState([
-    { key: 'home', title: 'Home', focusedIcon: 'home' },
+   
+    { key: 'collection', title: 'collection', focusedIcon: 'folder' },
+    { key: 'camera', title: 'camera', focusedIcon: 'camera' },
+    { key: 'profile', title: 'profile', focusedIcon: 'account' },
   ]);
 
   const renderScene = BottomNavigation.SceneMap({
-    home: HomeRoute,
+    camera: CameraRoute,
+    collection: CollectionRoute,
+    profile: ProfileRoute,
   });
 
   return (
+    
     <BottomNavigation
       navigationState={{ index, routes }}
       onIndexChange={setIndex}
       renderScene={renderScene}
-      
-      activeColor={Colors[colorScheme ?? 'light'].tint}
-      inactiveColor={Colors[colorScheme ?? 'light'].tint}
-      barStyle={{ backgroundColor: Colors[colorScheme ?? 'light'].background }}
+      activeColor='#fff'
+      labeled={false}
+      activeIndicatorStyle={{ backgroundColor: '#16423C' }}
+      inactiveColor='#000'
+      barStyle={{ backgroundColor: '#C4DAD2'}}
     />
   );
 }
