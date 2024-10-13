@@ -10,9 +10,12 @@ import {
   ScrollView,
   KeyboardAvoidingView,
   Platform,
+  Dimensions,
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { Link } from "expo-router";
+
+const { width, height } = Dimensions.get("window");
 
 export default function index() {
   const [text, setText] = useState("");
@@ -25,10 +28,8 @@ export default function index() {
         >
           <ScrollView contentContainerStyle={styles.scrollContainer}>
             <View style={styles.bottomView}>
-              <Text style={{ fontWeight: "900", fontSize: 30, color: "#16423C" }}>
-                Register
-              </Text>
-              <View style={{ marginTop: 60, width: "100%", alignItems: "center" }}>
+              <Text style={styles.title}>Register</Text>
+              <View style={styles.inputWrapper}>
                 <View style={styles.inputContainer}>
                   <Icon name="address-book" size={20} color="#16423C" style={styles.icon} />
                   <TextInput
@@ -85,7 +86,12 @@ export default function index() {
                   <Text style={styles.btnText}>Register</Text>
                 </TouchableOpacity>
               </Link>
-              <Text style={{ color: '#6A9C89', marginTop: 2 }}>Already have an account? <Link href='/' style={{ textDecorationLine: 'underline', fontWeight: '900' }}>SignIn</Link></Text>
+              <Text style={styles.signInText}>
+                Already have an account?{" "}
+                <Link href="/" style={styles.signInLink}>
+                  SignIn
+                </Link>
+              </Text>
             </View>
           </ScrollView>
         </KeyboardAvoidingView>
@@ -101,21 +107,29 @@ const styles = StyleSheet.create({
   },
   scrollContainer: {
     flexGrow: 1,
-    justifyContent: 'center',
+    justifyContent: "center",
   },
   bottomView: {
     flex: 1,
     alignItems: "center",
-    padding: 50,
+    padding: 20,
     width: "100%",
-    height: "90%",
     borderTopRightRadius: 30,
     borderTopLeftRadius: 30,
     borderTopColor: "#C4DAD2",
     backgroundColor: "#E9EFEC",
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
-    bottom: 0,
+  },
+  title: {
+    fontWeight: "900",
+    fontSize: 30,
+    color: "#16423C",
+  },
+  inputWrapper: {
+    marginTop: 60,
+    width: "100%",
+    alignItems: "center",
   },
   inputContainer: {
     flexDirection: "row",
@@ -125,8 +139,8 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     backgroundColor: "#fff",
     marginTop: 20,
-    marginBottom: 20,
     paddingHorizontal: 8,
+    width: "90%",
   },
   icon: {
     marginRight: 10,
@@ -136,18 +150,27 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   btn: {
-    marginTop: 120,
+    marginTop: '95%',
     backgroundColor: "#16423C",
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 20,
-    width: '95%',
-    justifyContent: 'center',
-    alignItems: 'center',
+    width: "90%",
+    justifyContent: "center",
+    alignItems: "center",
   },
   btnText: {
     color: "#fff",
     fontSize: 20,
     fontWeight: "bold",
+  },
+  signInText: {
+    color: "#6A9C89",
+    marginTop: 2,
+  },
+  signInLink: {
+    textDecorationLine: "underline",
+    fontWeight: "900",
+    color: "#16423C",
   },
 });

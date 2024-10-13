@@ -2,8 +2,9 @@ import React from 'react';
 import { BottomNavigation } from 'react-native-paper';
 
 import Camera from './index';
-import Collection from './collection';
+import Collection from '../collection';
 import Profile from './profile';
+import { ScreenStack } from 'react-native-screens';
 
 const CameraRoute = () => < Camera/>;
 const CollectionRoute = () => < Collection/>;
@@ -36,5 +37,6 @@ export default function TabLayout() {
       inactiveColor='#000'
       barStyle={{ backgroundColor: '#C4DAD2'}}
     />
+ 
   );
 }
