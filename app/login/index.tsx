@@ -7,6 +7,9 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
 } from "react-native";
 import LottieView from "lottie-react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
@@ -22,6 +25,11 @@ export default function index() {
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
+      <KeyboardAvoidingView
+          style={styles.container}
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+        >
+          <ScrollView contentContainerStyle={styles.scrollContainer}>
         <View style={styles.animationStyle}>
           <LottieView
             source={require("@/assets/animations/welcome.json")}
@@ -75,7 +83,7 @@ export default function index() {
           <Text style={{ color: "#6A9C89", marginTop: 2 }}>
             Don't have an account?{" "}
             <Link
-              href="./register"
+              href={"/register"}
               style={{
                 textDecorationLine: "underline",
                 fontWeight: "900",
@@ -86,6 +94,8 @@ export default function index() {
             </Link>
           </Text>
         </View>
+        </ScrollView>
+        </KeyboardAvoidingView>
       </SafeAreaView>
     </SafeAreaProvider>
   );
@@ -100,6 +110,9 @@ const styles = StyleSheet.create({
   lottie: {
     height: 300,
     width: 300,
+  },
+  scrollContainer: {
+    justifyContent: "center",
   },
   animationStyle: {
     flex: 1,
@@ -141,7 +154,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   btn: {
-    marginTop: 150,
+    marginTop: 60,
     backgroundColor: "#16423C",
     paddingVertical: 10,
     paddingHorizontal: 20,

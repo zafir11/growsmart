@@ -7,6 +7,9 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
+  ScrollView,
+  KeyboardAvoidingView,
+  Platform,
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { Link } from "expo-router";
@@ -16,64 +19,76 @@ export default function index() {
   return (
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
-        <View style={styles.bottomView}>
-          <Text style={{ fontWeight: "900", fontSize: 30, color: "#16423C" }}>
-            Register
-          </Text>
-          <View style={{ marginTop: 60, width: "100%", alignItems: "center" }}>
-            <View style={styles.inputContainer}>
-              <Icon name="address-book" size={20} color="#16423C" style={styles.icon} />
-              <TextInput
-                style={styles.input}
-                placeholder="Enter Name"
-                value={text}
-                onChangeText={(value) => setText(value)}
-              />
+        <KeyboardAvoidingView
+          style={styles.container}
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+        >
+          <ScrollView contentContainerStyle={styles.scrollContainer}>
+            <View style={styles.bottomView}>
+              <Text style={{ fontWeight: "900", fontSize: 30, color: "#16423C" }}>
+                Register
+              </Text>
+              <View style={{ marginTop: 60, width: "100%", alignItems: "center" }}>
+                <View style={styles.inputContainer}>
+                  <Icon name="address-book" size={20} color="#16423C" style={styles.icon} />
+                  <TextInput
+                    style={styles.input}
+                    placeholder="Enter Name"
+                    placeholderTextColor="#6A9C89"
+                    value={text}
+                    onChangeText={(value) => setText(value)}
+                  />
+                </View>
+                <View style={styles.inputContainer}>
+                  <Icon name="user" size={20} color="#16423C" style={styles.icon} />
+                  <TextInput
+                    style={styles.input}
+                    placeholder="Enter Username"
+                    placeholderTextColor="#6A9C89"
+                    value={text}
+                    onChangeText={(value) => setText(value)}
+                  />
+                </View>
+                <View style={styles.inputContainer}>
+                  <Icon name="address-card" size={20} color="#16423C" style={styles.icon} />
+                  <TextInput
+                    style={styles.input}
+                    placeholder="Enter Company(optional)"
+                    placeholderTextColor="#6A9C89"
+                    value={text}
+                    onChangeText={(value) => setText(value)}
+                  />
+                </View>
+                <View style={styles.inputContainer}>
+                  <Icon name="envelope" size={20} color="#16423C" style={styles.icon} />
+                  <TextInput
+                    style={styles.input}
+                    placeholder="Enter Email"
+                    placeholderTextColor="#6A9C89"
+                    value={text}
+                    onChangeText={(value) => setText(value)}
+                  />
+                </View>
+                <View style={styles.inputContainer}>
+                  <Icon name="lock" size={20} color="#16423C" style={styles.icon} />
+                  <TextInput
+                    style={styles.input}
+                    placeholder="Enter Password"
+                    placeholderTextColor="#6A9C89"
+                    value={text}
+                    onChangeText={(value) => setText(value)}
+                  />
+                </View>
+              </View>
+              <Link href={"/(tabs)"} asChild>
+                <TouchableOpacity style={styles.btn}>
+                  <Text style={styles.btnText}>Register</Text>
+                </TouchableOpacity>
+              </Link>
+              <Text style={{ color: '#6A9C89', marginTop: 2 }}>Already have an account? <Link href='/' style={{ textDecorationLine: 'underline', fontWeight: '900' }}>SignIn</Link></Text>
             </View>
-            <View style={styles.inputContainer}>
-              <Icon name="user" size={20} color="#16423C" style={styles.icon} />
-              <TextInput
-                style={styles.input}
-                placeholder="Enter Username"
-                value={text}
-                onChangeText={(value) => setText(value)}
-              />
-            </View>
-            <View style={styles.inputContainer}>
-              <Icon name="address-card" size={20} color="#16423C" style={styles.icon} />
-              <TextInput
-                style={styles.input}
-                placeholder="Enter Company(optional)"
-                value={text}
-                onChangeText={(value) => setText(value)}
-              />
-            </View>
-            <View style={styles.inputContainer}>
-              <Icon name="envelope" size={20} color="#16423C" style={styles.icon} />
-              <TextInput
-                style={styles.input}
-                placeholder="Enter Email"
-                value={text}
-                onChangeText={(value) => setText(value)}
-              />
-            </View>
-            <View style={styles.inputContainer}>
-              <Icon name="lock" size={20} color="#16423C" style={styles.icon} />
-              <TextInput
-                style={styles.input}
-                placeholder="Enter Password"
-                value={text}
-                onChangeText={(value) => setText(value)}
-              />
-            </View>
-          </View>
-          <Link href={"/(tabs)"} asChild>
-            <TouchableOpacity style={styles.btn}>
-              <Text style={styles.btnText}>Register</Text>
-            </TouchableOpacity>
-          </Link>
-          <Text style={{color:'#6A9C89', marginTop:2}}>Aready have a account? <Link href='/' style={{textDecorationLine:'underline',fontWeight:'900'}}>SignIn</Link></Text>
-        </View>
+          </ScrollView>
+        </KeyboardAvoidingView>
       </SafeAreaView>
     </SafeAreaProvider>
   );
@@ -81,9 +96,12 @@ export default function index() {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 100,
     flex: 1,
     backgroundColor: "#ffff",
+  },
+  scrollContainer: {
+    flexGrow: 1,
+    justifyContent: 'center',
   },
   bottomView: {
     flex: 1,
@@ -123,9 +141,9 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 20,
-    width:'95%',
+    width: '95%',
     justifyContent: 'center',
-    alignItems: 'center', 
+    alignItems: 'center',
   },
   btnText: {
     color: "#fff",
