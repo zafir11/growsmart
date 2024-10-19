@@ -4,11 +4,12 @@ import { BottomNavigation } from 'react-native-paper';
 import Camera from './index';
 import Collection from '../collection';
 import Profile from './profile';
-import { ScreenStack } from 'react-native-screens';
+import Map from './map';
 
 const CameraRoute = () => < Camera/>;
 const CollectionRoute = () => < Collection/>;
 const ProfileRoute = () => < Profile/>;
+const MapRoute = () => < Map/>;
 
 export default function TabLayout() {
   const [index, setIndex] = React.useState(1);
@@ -17,12 +18,14 @@ export default function TabLayout() {
     { key: 'collection', title: 'collection', focusedIcon: 'folder' },
     { key: 'camera', title: 'camera', focusedIcon: 'camera' },
     { key: 'profile', title: 'profile', focusedIcon: 'account' },
+    {key: 'map', title: 'map', focusedIcon: 'map'},
   ]);
 
   const renderScene = BottomNavigation.SceneMap({
     camera: CameraRoute,
     collection: CollectionRoute,
     profile: ProfileRoute,
+    map: MapRoute,
   });
 
   return (
